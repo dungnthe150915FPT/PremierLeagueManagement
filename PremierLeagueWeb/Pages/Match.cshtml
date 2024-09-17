@@ -1,0 +1,64 @@
+﻿@page
+@model PremierLeagueWeb.Pages.MatchModel
+@{
+    var message = ViewData["Message"]?.ToString();
+}
+<h1>Các trận đấu Ngoại hạng Anh</h1>
+<h2>Trận sắp diễn ra</h2>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            @{
+                if (!string.IsNullOrWhiteSpace(message))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @message
+                    </div>
+                }
+            }
+            <th>Ngày</th>
+            <th>Thời gian</th>
+            <th>Đội nhà</th>
+            <th>Tỉ số</th>
+            <th>Đội khách</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var match in Model.UpcomingMatches)
+        {
+            
+            <tr>
+                <td>@match.Time.ToString("dd/MM/yyyy")</td>
+                <td>@match.Time.ToString("HH:mm")</td>
+                <td>@match.HomeClub.ClubName</td>
+                <td>-</td>
+                <td>@match.AwayClub.ClubName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Trận đã diễn ra</h2>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Ngày</th>
+            <th>Thời gian</th>
+            <th>Đội nhà</th>
+            <th>Tỉ số</th>
+            <th>Đội khách</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var match in Model.FutureMatches)
+        {
+            <tr>
+                <td>@match.Time.ToString("dd/MM/yyyy")</td>
+                <td>@match.Time.ToString("HH:mm")</td>
+                <td>@match.HomeClub.ClubName</td>
+                <td>@($"{match.HomeClubScore} - {match.AwayClubScore}")</td>
+                <td>@match.AwayClub.ClubName</td>
+            </tr>
+        }
+    </tbody>
+</table>

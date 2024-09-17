@@ -1,0 +1,46 @@
+﻿@page
+@model PremierLeagueWeb.Pages.CoachModel
+@{
+}
+<style>
+    .coach-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .coach-image img {
+        max-width: 400px;
+        max-height: 400px;
+        border-radius: 8px;
+    }
+
+    .coach-details {
+        max-width: 600px;
+    }
+
+        .coach-details h2 {
+            color: #333;
+        }
+
+        .coach-details p {
+            margin-bottom: 8px;
+        }
+</style>
+
+<h1>Thông tin HLV</h1>
+
+<div class="coach-container">
+    <div class="coach-image">
+        <img src="@Model.Coach.Image" alt="Coach Image" />
+    </div>
+    <div class="coach-details">
+        <h2 style="color:red;">@Model.Coach.CoachName</h2>
+        <p><li>Ngày sinh: @Model.Coach.Dob</li></p>
+        <p><li>Quốc tịch: @Model.Coach.Nationality</li></p>
+        <p><li>Năm gia nhập đội bóng: @Model.Coach.ReleaseYearInClub</li></p>
+        <p><li>Mô tả: @Model.Coach.Description</li></p>
+        <!-- Add other coach properties here -->
+    </div>
+</div>

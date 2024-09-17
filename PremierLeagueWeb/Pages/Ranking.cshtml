@@ -1,0 +1,43 @@
+﻿@page
+@model PremierLeagueWeb.Pages.RankingModel
+@{
+}
+<h1>Bảng xếp hạng Premier League</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Xếp hạng</th>
+                <th>Đội</th>
+                <th>Số trận</th>
+                <th>Số trận thắng</th>
+                <th>Số trận hòa</th>
+                <th>Số trận thua</th>
+                <th>Bàn thắng</th>
+                <th>Bàn thua</th>
+                <th>Hiệu số</th>
+                <th>Điểm</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+                @foreach (var (index, ranking) in Model.Rankings.Select((value, i) => (i + 1, value)))
+                {
+                <tr>
+                    <td>@index</td>
+                    <td><img src="@ranking.Image" alt="Club Image" style="max-width: 50px; max-height: 50px;" /> @ranking.ClubName</td>
+                    <td>@ranking.Matches</td>
+                    <td>@ranking.Win</td>
+                    <td>@ranking.Draw</td>
+                    <td>@ranking.Lose</td>
+                    <td>@ranking.Goal</td>
+                    <td>@ranking.LoseGoal</td>
+                    <td>@ranking.NumberDifference</td>
+                    <td>@ranking.Score</td>
+                </tr>
+                }
+        </tbody>
+        </tbody>
+    </table>
+</div>

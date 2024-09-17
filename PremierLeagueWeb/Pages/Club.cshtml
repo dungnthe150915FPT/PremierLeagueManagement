@@ -1,0 +1,101 @@
+﻿@page
+@model PremierLeagueWeb.Pages.ClubModel
+@{
+}
+<style>
+    .club-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .club-image img {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 8px;
+    }
+
+    .club-details {
+        max-width: 600px;
+    }
+
+        .club-details h2 {
+            color: #333;
+        }
+
+        .club-details p {
+            margin-bottom: 8px;
+        }
+
+        .club-details h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .club-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .club-details ul li {
+                margin-bottom: 8px;
+            }
+</style>
+
+<h1>Thông tin đội bóng</h1>
+
+<div class="club-container">
+    <div class="club-image">
+        <img src="@Model.Club.Image" alt="Club Image" />
+    </div>
+    <div class="club-details">
+        <h2>@Model.Club.ClubName</h2>
+        <p>Mô tả: @Model.Club.Description</p>
+        <p>Năm thành lập: @Model.Club.ReleaseYear</p>
+        <p>Sân vận động: @Model.Club.Stadium</p>
+
+        <h3>Huấn luyện viên</h3>
+        <ul>
+            @foreach (var coach in Model.Club.Coaches)
+            {
+                <li>@coach.CoachName</li>
+            }
+        </ul>
+
+        <h3>Nhà tài trợ</h3>
+        <p>@Model.Club.SponsorName</p>
+
+        <h3>Nhà sản xuất áo đấu</h3>
+        <p>@Model.Club.CostumeManufacturerName</p>
+    </div>
+</div>
+
+<h2>Danh sách cầu thủ</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>STT</th>
+                <th>Cầu thủ</th>
+                <th>Ngày sinh</th>
+                <th>Quốc tịch</th>
+                <th>Vị trí</th>
+                <th>Số áo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var (index, player) in Model.Club.Players.Select((value, i) => (i + 1, value)))
+            {
+                <tr>
+                    <td>@index</td>
+                    <td><a asp-page="./Player" asp-route-id="@player.Id"><img src="@player.Image" alt="Player Image" style="max-width: 100px; max-height: 100px;" /> @player.PlayerName </a></td>
+                    <td>@player.Dob</td>
+                    <td>@player.Nationality</td>
+                    <td>@player.PlayerLocationName</td>
+                    <td>@player.Number</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

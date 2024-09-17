@@ -1,0 +1,42 @@
+﻿@page
+@model IndexModel
+@{
+    //ViewData["Title"] = "Home page";
+}
+
+<h1>Danh sách Clubs</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Thứ tự</th>
+                <th>Đội</th>
+                <th>Năm thành lập</th>
+                <th>Sân nhà</th>
+                <th>Nhà sản xuất áo đấu</th>
+                <th>Nhà tài trợ</th>
+                <th>HLV</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var club in Model.Clubs)
+            {
+                <tr>
+                    <td>@club.Id</td>
+                    <td><a asp-page="./Club" asp-route-id="@club.Id"><img src="@club.Image" alt="Club Image" style="max-width: 50px; max-height: 50px;" />   @club.ClubName</a></td>
+                    <td>@club.ReleaseYear</td>
+                    <td>@club.Stadium</td>
+                    <td>@club.CostumeManufacturerName</td>
+                    <td>@club.SponsorName</td>
+                    <td>
+                            @foreach (var coach in club.Coaches)
+                            {
+                            <a asp-page="./Coach" asp-route-id="@coach.Id">@coach.CoachName</a>
+                            }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
